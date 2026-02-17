@@ -9,7 +9,7 @@ import type {
 const SEED_DATA: Recommendation[] = [
   {
     id: "rec_001",
-    storeId: "store_acme",
+    storeId: "Acme Corp",
     category: "fulfillment_center",
     action: "create",
     title: "Create fulfillment center for Acme Corp",
@@ -41,7 +41,7 @@ const SEED_DATA: Recommendation[] = [
   },
   {
     id: "rec_002",
-    storeId: "store_acme",
+    storeId: "Acme Corp",
     category: "catalog_item",
     action: "create",
     title: "Add Cotton T-Shirt to catalog",
@@ -63,7 +63,7 @@ const SEED_DATA: Recommendation[] = [
   },
   {
     id: "rec_003",
-    storeId: "store_acme",
+    storeId: "Acme Corp",
     category: "catalog_item",
     action: "update",
     title: "Update HS code for Leather Wallet",
@@ -80,7 +80,7 @@ const SEED_DATA: Recommendation[] = [
   },
   {
     id: "rec_004",
-    storeId: "store_globex",
+    storeId: "Globex International",
     category: "carrier_account",
     action: "create",
     title: "Connect FedEx carrier account",
@@ -96,7 +96,7 @@ const SEED_DATA: Recommendation[] = [
   },
   {
     id: "rec_005",
-    storeId: "store_globex",
+    storeId: "Globex International",
     category: "webhook",
     action: "create",
     title: "Create order webhook for Globex",
@@ -109,12 +109,12 @@ const SEED_DATA: Recommendation[] = [
     status: "approved",
     createdAt: "2025-02-14T09:00:00Z",
     updatedAt: "2025-02-15T08:30:00Z",
-    reviewedBy: "rep_sarah",
+    reviewedBy: "Sarah Chen",
     reviewedAt: "2025-02-15T08:30:00Z",
   },
   {
     id: "rec_006",
-    storeId: "store_initech",
+    storeId: "Initech Solutions",
     category: "fulfillment_center",
     action: "create",
     title: "Create EU fulfillment center for Initech",
@@ -142,12 +142,12 @@ const SEED_DATA: Recommendation[] = [
     status: "approved",
     createdAt: "2025-02-13T14:00:00Z",
     updatedAt: "2025-02-14T10:00:00Z",
-    reviewedBy: "rep_mike",
+    reviewedBy: "Mike Torres",
     reviewedAt: "2025-02-14T10:00:00Z",
   },
   {
     id: "rec_007",
-    storeId: "store_acme",
+    storeId: "Acme Corp",
     category: "pddp",
     action: "update",
     title: "Enable PDDP for UK VAT collection",
@@ -160,7 +160,7 @@ const SEED_DATA: Recommendation[] = [
     status: "executed",
     createdAt: "2025-02-12T08:00:00Z",
     updatedAt: "2025-02-13T09:00:00Z",
-    reviewedBy: "rep_sarah",
+    reviewedBy: "Sarah Chen",
     reviewedAt: "2025-02-12T16:00:00Z",
     executionResult: {
       success: true,
@@ -169,7 +169,7 @@ const SEED_DATA: Recommendation[] = [
   },
   {
     id: "rec_008",
-    storeId: "store_globex",
+    storeId: "Globex International",
     category: "webhook",
     action: "create",
     title: "Create shipment webhook for Globex",
@@ -182,7 +182,7 @@ const SEED_DATA: Recommendation[] = [
     status: "executed",
     createdAt: "2025-02-11T10:00:00Z",
     updatedAt: "2025-02-12T11:00:00Z",
-    reviewedBy: "rep_mike",
+    reviewedBy: "Mike Torres",
     reviewedAt: "2025-02-11T15:00:00Z",
     executionResult: {
       success: true,
@@ -191,7 +191,7 @@ const SEED_DATA: Recommendation[] = [
   },
   {
     id: "rec_009",
-    storeId: "store_initech",
+    storeId: "Initech Solutions",
     category: "carrier_account",
     action: "create",
     title: "Connect DHL account for Initech",
@@ -203,7 +203,7 @@ const SEED_DATA: Recommendation[] = [
     status: "failed",
     createdAt: "2025-02-10T12:00:00Z",
     updatedAt: "2025-02-11T09:00:00Z",
-    reviewedBy: "rep_sarah",
+    reviewedBy: "Sarah Chen",
     reviewedAt: "2025-02-10T16:00:00Z",
     executionResult: {
       success: false,
@@ -212,7 +212,7 @@ const SEED_DATA: Recommendation[] = [
   },
   {
     id: "rec_010",
-    storeId: "store_acme",
+    storeId: "Acme Corp",
     category: "collect_invoice",
     action: "update",
     title: "Update collect invoice fee config for Acme",
@@ -225,7 +225,7 @@ const SEED_DATA: Recommendation[] = [
     status: "rejected",
     createdAt: "2025-02-09T10:00:00Z",
     updatedAt: "2025-02-10T08:00:00Z",
-    reviewedBy: "rep_mike",
+    reviewedBy: "Mike Torres",
     reviewedAt: "2025-02-10T08:00:00Z",
   },
 ];
