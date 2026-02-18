@@ -6,17 +6,25 @@ import type {
   ExecutionResult,
 } from "@/types/recommendations";
 
+// Store configuration with Zonos Store IDs
+export const STORES = {
+  "Lennon Test": { id: "7910", name: "Lennon Test" },
+  "Zonos Demo App": { id: "7908", name: "Zonos Demo App" },
+} as const;
+
+export type StoreName = keyof typeof STORES;
+
 const SEED_DATA: Recommendation[] = [
   {
     id: "rec_001",
-    storeId: "Acme Corp",
+    storeId: "Lennon Test",
     category: "fulfillment_center",
     action: "create",
-    title: "Create fulfillment center for Acme Corp",
+    title: "Create fulfillment center for Lennon Test",
     description:
-      "Add primary warehouse in West Jordan, UT as a fulfillment center for Acme Corp.",
+      "Add primary warehouse in West Jordan, UT as a fulfillment center.",
     payload: {
-      name: "Acme Corp - West Jordan Warehouse",
+      name: "Lennon Test - West Jordan Warehouse",
       party: {
         location: {
           line1: "6993 S Old Bingham Hwy",
@@ -28,9 +36,9 @@ const SEED_DATA: Recommendation[] = [
         person: {
           firstName: "John",
           lastName: "Smith",
-          email: "john@acmecorp.com",
+          email: "john@lennontest.com",
           phone: "8015551234",
-          companyName: "Acme Corp",
+          companyName: "Lennon Test",
         },
         type: "ORIGIN",
       },
@@ -41,7 +49,7 @@ const SEED_DATA: Recommendation[] = [
   },
   {
     id: "rec_002",
-    storeId: "Acme Corp",
+    storeId: "Lennon Test",
     category: "catalog_item",
     action: "create",
     title: "Add Cotton T-Shirt to catalog",
@@ -63,7 +71,7 @@ const SEED_DATA: Recommendation[] = [
   },
   {
     id: "rec_003",
-    storeId: "Acme Corp",
+    storeId: "Lennon Test",
     category: "catalog_item",
     action: "update",
     title: "Update HS code for Leather Wallet",
@@ -80,12 +88,12 @@ const SEED_DATA: Recommendation[] = [
   },
   {
     id: "rec_004",
-    storeId: "Globex International",
+    storeId: "Zonos Demo App",
     category: "carrier_account",
     action: "create",
     title: "Connect FedEx carrier account",
     description:
-      "Connect Globex Corp's FedEx account for international shipping.",
+      "Connect FedEx account for international shipping.",
     payload: {
       carrier: "FEDEX",
       accountNumber: "123456789",
@@ -96,14 +104,14 @@ const SEED_DATA: Recommendation[] = [
   },
   {
     id: "rec_005",
-    storeId: "Globex International",
+    storeId: "Zonos Demo App",
     category: "webhook",
     action: "create",
-    title: "Create order webhook for Globex",
+    title: "Create order webhook",
     description:
-      "Set up webhook to notify Globex when orders are created or canceled.",
+      "Set up webhook to notify when orders are created or canceled.",
     payload: {
-      url: "https://globex.com/webhooks/zonos-orders",
+      url: "https://demo.zonos.com/webhooks/orders",
       events: ["ORDER_CREATED", "ORDER_CANCELED"],
     },
     status: "approved",
@@ -114,14 +122,14 @@ const SEED_DATA: Recommendation[] = [
   },
   {
     id: "rec_006",
-    storeId: "Initech Solutions",
+    storeId: "Zonos Demo App",
     category: "fulfillment_center",
     action: "create",
-    title: "Create EU fulfillment center for Initech",
+    title: "Create EU fulfillment center",
     description:
       "Add European warehouse in Amsterdam as fulfillment center.",
     payload: {
-      name: "Initech - Amsterdam Warehouse",
+      name: "Zonos Demo - Amsterdam Warehouse",
       party: {
         location: {
           line1: "Keizersgracht 123",
@@ -132,9 +140,9 @@ const SEED_DATA: Recommendation[] = [
         person: {
           firstName: "Hans",
           lastName: "Mueller",
-          email: "hans@initech.eu",
+          email: "hans@demo.zonos.com",
           phone: "+31201234567",
-          companyName: "Initech EU",
+          companyName: "Zonos Demo EU",
         },
         type: "ORIGIN",
       },
@@ -147,12 +155,12 @@ const SEED_DATA: Recommendation[] = [
   },
   {
     id: "rec_007",
-    storeId: "Acme Corp",
+    storeId: "Lennon Test",
     category: "pddp",
     action: "update",
     title: "Enable PDDP for UK VAT collection",
     description:
-      "Configure PDDP settings to enable UK VAT collection for Acme Corp.",
+      "Configure PDDP settings to enable UK VAT collection.",
     payload: {
       enabled: true,
       countries: ["GB"],
@@ -169,14 +177,14 @@ const SEED_DATA: Recommendation[] = [
   },
   {
     id: "rec_008",
-    storeId: "Globex International",
+    storeId: "Zonos Demo App",
     category: "webhook",
     action: "create",
-    title: "Create shipment webhook for Globex",
+    title: "Create shipment webhook",
     description:
       "Set up webhook for shipment events.",
     payload: {
-      url: "https://globex.com/webhooks/zonos-shipments",
+      url: "https://demo.zonos.com/webhooks/shipments",
       events: ["SHIPMENT_CREATED", "SHIPMENT_CANCELED"],
     },
     status: "executed",
@@ -191,11 +199,11 @@ const SEED_DATA: Recommendation[] = [
   },
   {
     id: "rec_009",
-    storeId: "Initech Solutions",
+    storeId: "Zonos Demo App",
     category: "carrier_account",
     action: "create",
-    title: "Connect DHL account for Initech",
-    description: "Connect Initech's DHL Express account for EU shipments.",
+    title: "Connect DHL account",
+    description: "Connect DHL Express account for EU shipments.",
     payload: {
       carrier: "DHL",
       accountNumber: "987654321",
@@ -212,12 +220,12 @@ const SEED_DATA: Recommendation[] = [
   },
   {
     id: "rec_010",
-    storeId: "Acme Corp",
+    storeId: "Lennon Test",
     category: "collect_invoice",
     action: "update",
-    title: "Update collect invoice fee config for Acme",
+    title: "Update collect invoice fee config",
     description:
-      "Set collect invoice handling fee to $5.00 USD for Acme Corp.",
+      "Set collect invoice handling fee to $5.00 USD.",
     payload: {
       handlingFee: 5.0,
       currency: "USD",
@@ -310,5 +318,10 @@ export class MockDataProvider implements DataProvider {
     }
 
     return counts;
+  }
+
+  // Get list of unique stores
+  async getStores(): Promise<Array<{ id: string; name: string }>> {
+    return Object.values(STORES);
   }
 }

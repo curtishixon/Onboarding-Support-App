@@ -6,6 +6,7 @@ import type { Recommendation, RecommendationStatus, ActionCategory } from "@/typ
 import { fetchRecommendations } from "@/lib/api-client";
 import { StatusBadge } from "./status-badge";
 import { CategoryTag } from "./category-tag";
+import { STORES } from "@/lib/mock-data-provider";
 
 interface Props {
   initialStatus?: RecommendationStatus;
@@ -18,22 +19,44 @@ export function RecommendationsTable({ initialStatus }: Props) {
     initialStatus ?? ""
   );
   const [categoryFilter, setCategoryFilter] = useState<ActionCategory | "">("");
+  const [storeFilter, setStoreFilter] = useState<string>("");
 
   useEffect(() => {
     setLoading(true);
     const filters: Record<string, string> = {};
     if (statusFilter) filters.status = statusFilter;
     if (categoryFilter) filters.category = categoryFilter;
+    if (storeFilter) filters.storeId = storeFilter;
 
     fetchRecommendations(filters as Parameters<typeof fetchRecommendations>[0])
       .then(setRecommendations)
       .finally(() => setLoading(false));
-  }, [statusFilter, categoryFilter]);
+  }, [statusFilter, categoryFilter, storeFilter]);
 
   return (
     <div>
       {/* Filters */}
-      <div className="flex gap-3 px-6 py-4 bg-gray-50/50 border-b border-gray-100">
+      <div className="flex flex-wrap gap-3 px-6 py-4 bg-gray-50/50 border-b border-gray-100">
+        {/* Store Filter */}
+        <div className="relative">
+          <select
+            value={storeFilter}
+            onChange={(e) => setStoreFilter(e.target.value)}
+            className="appearance-none border border-gray-200 rounded-lg px-4 py-2 pr-10 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow"
+          >
+            <option value="">All Stores</option>
+            {Object.entries(STORES).map(([name, { id }]) => (
+              <option key={id} value={name}>
+                {name}
+              </option>
+            ))}
+          </select>
+          <svg className="w-4 h-4 text-gray-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </div>
+
+        {/* Status Filter */}
         <div className="relative">
           <select
             value={statusFilter}
@@ -52,6 +75,7 @@ export function RecommendationsTable({ initialStatus }: Props) {
           </svg>
         </div>
 
+        {/* Category Filter */}
         <div className="relative">
           <select
             value={categoryFilter}
@@ -125,7 +149,11 @@ export function RecommendationsTable({ initialStatus }: Props) {
                       {rec.title}
                     </Link>
                   </td>
-                  <td className="px-6 py-4 text-gray-500 font-mono text-xs">{rec.storeId}</td>
+                  <td className="px-6 py-4">
+                    <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-gray-100 text-gray-700">
+                      {rec.storeId}
+                    </span>
+                  </td>
                   <td className="px-6 py-4 text-gray-500">
                     {new Date(rec.updatedAt).toLocaleDateString(undefined, {
                       month: "short",
