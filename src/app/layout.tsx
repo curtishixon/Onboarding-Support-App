@@ -14,9 +14,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="flex min-h-screen bg-gray-50 text-gray-900">
+      <body className="flex min-h-screen bg-gray-50 text-gray-800 antialiased">
         <Sidebar />
-        <main className="flex-1 p-8">{children}</main>
+        <main className="flex-1 p-8 overflow-auto">
+          <div className="max-w-7xl mx-auto">
+            {children}
+          </div>
+        </main>
       </body>
     </html>
   );

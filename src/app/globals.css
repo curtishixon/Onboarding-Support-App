@@ -1,1 +1,80 @@
 @import "tailwindcss";
+
+:root {
+  /* Zonos Brand Colors */
+  --zonos-blue-600: #2563eb;
+  --zonos-blue-700: #1d4ed8;
+  --zonos-blue-800: #1e40af;
+  --zonos-cyan-500: #06b6d4;
+  --zonos-cyan-400: #22d3ee;
+  --zonos-purple-500: #a855f7;
+  --zonos-purple-600: #9333ea;
+
+  /* Gradients */
+  --zonos-gradient-primary: linear-gradient(135deg, var(--zonos-blue-700) 0%, var(--zonos-blue-600) 50%, var(--zonos-cyan-500) 100%);
+  --zonos-gradient-text: linear-gradient(90deg, var(--zonos-blue-600) 0%, var(--zonos-cyan-500) 100%);
+  --zonos-gradient-sidebar: linear-gradient(180deg, var(--zonos-blue-800) 0%, var(--zonos-blue-700) 100%);
+
+  /* Neutral Colors */
+  --zonos-gray-50: #f9fafb;
+  --zonos-gray-100: #f3f4f6;
+  --zonos-gray-200: #e5e7eb;
+  --zonos-gray-300: #d1d5db;
+  --zonos-gray-400: #9ca3af;
+  --zonos-gray-500: #6b7280;
+  --zonos-gray-600: #4b5563;
+  --zonos-gray-700: #374151;
+  --zonos-gray-800: #1f2937;
+  --zonos-gray-900: #111827;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+/* Base styles */
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Gradient text utility */
+.text-gradient {
+  background: var(--zonos-gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Zonos button styles */
+.btn-primary {
+  background: var(--zonos-gradient-primary);
+  color: white;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+/* Card hover effect */
+.card-hover {
+  transition: all 0.2s ease;
+}
+
+.card-hover:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+/* Sidebar gradient background */
+.sidebar-gradient {
+  background: var(--zonos-gradient-sidebar);
+}
