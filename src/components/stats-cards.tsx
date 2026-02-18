@@ -14,7 +14,7 @@ const CARD_CONFIG: {
   {
     status: "pending",
     label: "Pending",
-    bgColor: "bg-amber-50",
+    bgColor: "bg-amber-500/10",
     iconColor: "text-amber-500",
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -25,7 +25,7 @@ const CARD_CONFIG: {
   {
     status: "approved",
     label: "Approved",
-    bgColor: "bg-blue-50",
+    bgColor: "bg-blue-500/10",
     iconColor: "text-blue-500",
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -36,7 +36,7 @@ const CARD_CONFIG: {
   {
     status: "executed",
     label: "Executed",
-    bgColor: "bg-emerald-50",
+    bgColor: "bg-emerald-500/10",
     iconColor: "text-emerald-500",
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -47,7 +47,7 @@ const CARD_CONFIG: {
   {
     status: "failed",
     label: "Failed",
-    bgColor: "bg-red-50",
+    bgColor: "bg-red-500/10",
     iconColor: "text-red-500",
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -69,12 +69,12 @@ export function StatsCards() {
       {CARD_CONFIG.map(({ status, label, bgColor, iconColor, icon }) => (
         <div
           key={status}
-          className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 card-hover"
+          className="bg-[var(--bg-secondary)] rounded-xl p-5 shadow-sm border border-[var(--border-primary)] card-hover transition-colors"
         >
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-500">{label}</p>
-              <p className="text-3xl font-bold text-gray-900 mt-1">
+              <p className="text-sm font-medium text-[var(--text-tertiary)]">{label}</p>
+              <p className="text-3xl font-bold text-[var(--text-primary)] mt-1">
                 {counts ? counts[status] : "-"}
               </p>
             </div>

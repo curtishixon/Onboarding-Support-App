@@ -9,7 +9,7 @@ export function SettingsPayload({ data }: Props) {
     <div className="space-y-3">
       {entries.map(([key, value]) => (
         <div key={key}>
-          <p className="text-sm font-medium text-gray-500">
+          <p className="text-sm font-medium text-[var(--text-tertiary)]">
             {key.replace(/([A-Z])/g, " $1").replace(/^./, (s) => s.toUpperCase())}
           </p>
           <p className="text-sm font-mono">

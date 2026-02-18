@@ -11,18 +11,18 @@ export function WebhookPayload({ data }: Props) {
     <div className="space-y-3">
       {url !== null && (
         <div>
-          <p className="text-sm font-medium text-gray-500">Webhook URL</p>
+          <p className="text-sm font-medium text-[var(--text-tertiary)]">Webhook URL</p>
           <p className="text-sm font-mono break-all">{url}</p>
         </div>
       )}
       {events !== null && (
         <div>
-          <p className="text-sm font-medium text-gray-500">Events</p>
+          <p className="text-sm font-medium text-[var(--text-tertiary)]">Events</p>
           <div className="flex flex-wrap gap-1 mt-1">
             {events.map((event) => (
               <span
                 key={event}
-                className="inline-flex items-center px-2 py-0.5 rounded text-xs font-mono bg-gray-100 text-gray-700"
+                className="inline-flex items-center px-2 py-0.5 rounded text-xs font-mono bg-[var(--bg-tertiary)] text-[var(--text-secondary)]"
               >
                 {event}
               </span>
@@ -32,7 +32,7 @@ export function WebhookPayload({ data }: Props) {
       )}
       {id !== null && (
         <div>
-          <p className="text-sm font-medium text-gray-500">Webhook ID</p>
+          <p className="text-sm font-medium text-[var(--text-tertiary)]">Webhook ID</p>
           <p className="text-sm font-mono">{id}</p>
         </div>
       )}

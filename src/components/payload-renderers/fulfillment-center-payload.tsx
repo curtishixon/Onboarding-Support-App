@@ -27,23 +27,23 @@ export function FulfillmentCenterPayload({ data }: Props) {
   return (
     <div className="space-y-3">
       <div>
-        <p className="text-sm font-medium text-gray-500">Center Name</p>
+        <p className="text-sm font-medium text-[var(--text-tertiary)]">Center Name</p>
         <p className="text-sm">{str(data.name) || "-"}</p>
       </div>
       {location && (
         <div>
-          <p className="text-sm font-medium text-gray-500">Address</p>
+          <p className="text-sm font-medium text-[var(--text-tertiary)]">Address</p>
           {addressLine && <p className="text-sm">{addressLine}</p>}
           {cityLine.trim() && <p className="text-sm">{cityLine}</p>}
         </div>
       )}
       {person && (
         <div>
-          <p className="text-sm font-medium text-gray-500">Contact</p>
+          <p className="text-sm font-medium text-[var(--text-tertiary)]">Contact</p>
           {contactName && <p className="text-sm">{contactName}</p>}
-          {str(person.email) && <p className="text-sm text-gray-500">{str(person.email)}</p>}
-          {str(person.phone) && <p className="text-sm text-gray-500">{str(person.phone)}</p>}
-          {str(person.companyName) && <p className="text-sm text-gray-500">{str(person.companyName)}</p>}
+          {str(person.email) && <p className="text-sm text-[var(--text-tertiary)]">{str(person.email)}</p>}
+          {str(person.phone) && <p className="text-sm text-[var(--text-tertiary)]">{str(person.phone)}</p>}
+          {str(person.companyName) && <p className="text-sm text-[var(--text-tertiary)]">{str(person.companyName)}</p>}
         </div>
       )}
     </div>

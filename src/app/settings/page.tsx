@@ -114,17 +114,17 @@ export default function SettingsPage() {
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gradient">Settings Viewer</h1>
-        <p className="text-gray-500 mt-1">
+        <p className="text-[var(--text-tertiary)] mt-1">
           Read-only view of current Zonos store configuration
         </p>
       </div>
 
       {/* Info Banner */}
-      <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 mb-6 flex items-start gap-3">
+      <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4 mb-6 flex items-start gap-3">
         <svg className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
-        <p className="text-sm text-blue-700">
+        <p className="text-sm text-blue-600 dark:text-blue-400">
           These settings are fetched live from the Zonos API. Click on a section to view its current configuration.
         </p>
       </div>
@@ -134,20 +134,20 @@ export default function SettingsPage() {
         {SECTIONS.map(({ key, label, type, icon }) => (
           <div
             key={key}
-            className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden card-hover"
+            className="bg-[var(--bg-secondary)] rounded-xl border border-[var(--border-primary)] shadow-sm overflow-hidden card-hover transition-colors"
           >
             <button
               onClick={() => toggleSection(key, type)}
-              className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-gray-50/50 transition-colors"
+              className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-[var(--bg-hover)] transition-colors"
             >
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-gray-100 text-gray-600 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-lg bg-[var(--bg-tertiary)] text-[var(--text-secondary)] flex items-center justify-center">
                   {icon}
                 </div>
-                <span className="font-medium text-gray-900">{label}</span>
+                <span className="font-medium text-[var(--text-primary)]">{label}</span>
               </div>
               <svg
-                className={`w-5 h-5 text-gray-400 transition-transform ${expanded[key] ? "rotate-180" : ""}`}
+                className={`w-5 h-5 text-[var(--text-muted)] transition-transform ${expanded[key] ? "rotate-180" : ""}`}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -157,9 +157,9 @@ export default function SettingsPage() {
             </button>
 
             {expanded[key] && (
-              <div className="border-t border-gray-100 p-5 bg-gray-50/30">
+              <div className="border-t border-[var(--border-primary)] p-5 bg-[var(--bg-tertiary)]">
                 {loading[key] ? (
-                  <div className="flex items-center gap-3 text-gray-500 py-4">
+                  <div className="flex items-center gap-3 text-[var(--text-tertiary)] py-4">
                     <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
@@ -171,7 +171,7 @@ export default function SettingsPage() {
                     {JSON.stringify(data[key], null, 2)}
                   </pre>
                 ) : (
-                  <p className="text-sm text-gray-500 py-4">No data available.</p>
+                  <p className="text-sm text-[var(--text-tertiary)] py-4">No data available.</p>
                 )}
               </div>
             )}

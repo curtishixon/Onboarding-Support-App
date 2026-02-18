@@ -15,17 +15,17 @@
   --zonos-gradient-text: linear-gradient(90deg, var(--zonos-blue-600) 0%, var(--zonos-cyan-500) 100%);
   --zonos-gradient-sidebar: linear-gradient(180deg, var(--zonos-blue-800) 0%, var(--zonos-blue-700) 100%);
 
-  /* Neutral Colors */
-  --zonos-gray-50: #f9fafb;
-  --zonos-gray-100: #f3f4f6;
-  --zonos-gray-200: #e5e7eb;
-  --zonos-gray-300: #d1d5db;
-  --zonos-gray-400: #9ca3af;
-  --zonos-gray-500: #6b7280;
-  --zonos-gray-600: #4b5563;
-  --zonos-gray-700: #374151;
-  --zonos-gray-800: #1f2937;
-  --zonos-gray-900: #111827;
+  /* Light Mode Colors */
+  --bg-primary: #f9fafb;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f3f4f6;
+  --bg-hover: rgba(59, 130, 246, 0.05);
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --text-tertiary: #6b7280;
+  --text-muted: #9ca3af;
+  --border-primary: #e5e7eb;
+  --border-secondary: #f3f4f6;
 
   /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -33,11 +33,35 @@
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
+/* Dark Mode Colors */
+.dark {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-tertiary: #334155;
+  --bg-hover: rgba(59, 130, 246, 0.1);
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-tertiary: #94a3b8;
+  --text-muted: #64748b;
+  --border-primary: #334155;
+  --border-secondary: #1e293b;
+
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.3);
+
+  /* Dark mode gradient adjustments */
+  --zonos-gradient-sidebar: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+}
+
 /* Base styles */
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 /* Gradient text utility */
@@ -64,6 +88,15 @@ body {
   transform: translateY(-1px);
 }
 
+/* Card styles with theme support */
+.card {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow-sm);
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
 /* Card hover effect */
 .card-hover {
   transition: all 0.2s ease;
@@ -77,4 +110,59 @@ body {
 /* Sidebar gradient background */
 .sidebar-gradient {
   background: var(--zonos-gradient-sidebar);
+}
+
+/* Dark mode specific styles */
+.dark .sidebar-gradient {
+  border-right: 1px solid var(--border-primary);
+}
+
+/* Form inputs dark mode */
+.dark select,
+.dark input {
+  background-color: var(--bg-secondary);
+  border-color: var(--border-primary);
+  color: var(--text-primary);
+}
+
+.dark select:focus,
+.dark input:focus {
+  border-color: var(--zonos-blue-600);
+}
+
+/* Table styles dark mode */
+.dark table {
+  background-color: var(--bg-secondary);
+}
+
+.dark thead {
+  background-color: var(--bg-tertiary);
+}
+
+.dark tbody tr:hover {
+  background-color: var(--bg-hover);
+}
+
+/* Code blocks dark mode */
+.dark pre {
+  background-color: #0d1117;
+}
+
+/* Scrollbar dark mode */
+.dark ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: var(--border-primary);
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
 }
