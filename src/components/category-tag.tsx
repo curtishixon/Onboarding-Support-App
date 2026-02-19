@@ -1,55 +1,21 @@
 import type { ActionCategory } from "@/types/recommendations";
 import { ACTION_CATEGORY_LABELS } from "@/types/recommendations";
 
-const CATEGORY_STYLES: Record<ActionCategory, { bg: string; text: string; border: string }> = {
-  fulfillment_center: {
-    bg: "bg-purple-50",
-    text: "text-purple-700",
-    border: "border-purple-200",
-  },
-  catalog_item: {
-    bg: "bg-indigo-50",
-    text: "text-indigo-700",
-    border: "border-indigo-200",
-  },
-  carrier_account: {
-    bg: "bg-cyan-50",
-    text: "text-cyan-700",
-    border: "border-cyan-200",
-  },
-  cartonization: {
-    bg: "bg-teal-50",
-    text: "text-teal-700",
-    border: "border-teal-200",
-  },
-  packing_slip: {
-    bg: "bg-emerald-50",
-    text: "text-emerald-700",
-    border: "border-emerald-200",
-  },
-  pddp: {
-    bg: "bg-orange-50",
-    text: "text-orange-700",
-    border: "border-orange-200",
-  },
-  collect_invoice: {
-    bg: "bg-amber-50",
-    text: "text-amber-700",
-    border: "border-amber-200",
-  },
-  webhook: {
-    bg: "bg-pink-50",
-    text: "text-pink-700",
-    border: "border-pink-200",
-  },
+const CATEGORY_STYLES: Record<ActionCategory, string> = {
+  fulfillment_center: "bg-purple-100 text-purple-800 dark:bg-purple-500/20 dark:text-purple-300 border-purple-300 dark:border-purple-500/40",
+  catalog_item: "bg-indigo-100 text-indigo-800 dark:bg-indigo-500/20 dark:text-indigo-300 border-indigo-300 dark:border-indigo-500/40",
+  carrier_account: "bg-cyan-100 text-cyan-800 dark:bg-cyan-500/20 dark:text-cyan-300 border-cyan-300 dark:border-cyan-500/40",
+  cartonization: "bg-teal-100 text-teal-800 dark:bg-teal-500/20 dark:text-teal-300 border-teal-300 dark:border-teal-500/40",
+  packing_slip: "bg-emerald-100 text-emerald-800 dark:bg-emerald-500/20 dark:text-emerald-300 border-emerald-300 dark:border-emerald-500/40",
+  pddp: "bg-orange-100 text-orange-800 dark:bg-orange-500/20 dark:text-orange-300 border-orange-300 dark:border-orange-500/40",
+  collect_invoice: "bg-amber-100 text-amber-800 dark:bg-amber-500/20 dark:text-amber-300 border-amber-300 dark:border-amber-500/40",
+  webhook: "bg-pink-100 text-pink-800 dark:bg-pink-500/20 dark:text-pink-300 border-pink-300 dark:border-pink-500/40",
 };
 
 export function CategoryTag({ category }: { category: ActionCategory }) {
-  const style = CATEGORY_STYLES[category];
-
   return (
     <span
-      className={`inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium border ${style.bg} ${style.text} ${style.border}`}
+      className={`inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold border ${CATEGORY_STYLES[category]}`}
     >
       {ACTION_CATEGORY_LABELS[category]}
     </span>
