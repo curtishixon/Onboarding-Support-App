@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import type { PartyCreateInput } from "@/types/zonos";
-import { getApiKey } from "@/lib/credentials";
-
-const ZONOS_API_URL = "https://api.zonos.com/graphql";
+import { createFulfillmentCenter } from "@/lib/zonos-client";
+import type { FulfillmentCenterCreateInput } from "@/types/zonos";
 
 interface FulfillmentCenterSetupRequest {
   person: {
@@ -21,26 +19,6 @@ interface FulfillmentCenterSetupRequest {
     countryCode: string;
     postalCode: string;
   };
-}
-
-async function zonosGraphQL<T>(
-  query: string,
-  variables: Record<string, unknown>
-): Promise<{ data?: T; errors?: Array<{ message: string }> }> {
-  const response = await fetch(ZONOS_API_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      credentialToken: getApiKey(),
-    },
-    body: JSON.stringify({ query, variables }),
-  });
-
-  if (!response.ok) {
-    throw new Error(`Zonos API error: ${response.status} ${response.statusText}`);
-  }
-
-  return response.json();
 }
 
 export async function POST(request: NextRequest) {
@@ -66,71 +44,50 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  // Step 1: Create the party with type ORIGIN
-  const partyInput: PartyCreateInput = {
-    type: "ORIGIN",
-    location: {
-      line1: location.line1,
-      line2: location.line2 || undefined,
-      line3: location.line3 || undefined,
-      locality: location.locality,
-      administrativeAreaCode: location.administrativeAreaCode || undefined,
-      postalCode: location.postalCode,
-      countryCode: location.countryCode,
-    },
-    person: {
-      companyName: person.companyName,
-      firstName: person.firstName,
-      lastName: person.lastName,
-      email: person.email,
-      phone: person.phone || undefined,
+  // Build the input for the existing createFulfillmentCenter function
+  // which handles: partyCreate (ORIGIN) → fulfillmentCenterCreate
+  const input: FulfillmentCenterCreateInput = {
+    name: person.companyName,
+    party: {
+      type: "ORIGIN",
+      location: {
+        line1: location.line1,
+        line2: location.line2 || undefined,
+        line3: location.line3 || undefined,
+        locality: location.locality,
+        administrativeAreaCode: location.administrativeAreaCode || undefined,
+        postalCode: location.postalCode,
+        countryCode: location.countryCode,
+      },
+      person: {
+        companyName: person.companyName,
+        firstName: person.firstName,
+        lastName: person.lastName,
+        email: person.email,
+        phone: person.phone || undefined,
+      },
     },
   };
 
-  const partyResult = await zonosGraphQL<{ partyCreate: { id: string } }>(
-    `mutation CreatePartyForFulfillmentCenter($input: PartyCreateInput!) {
-      partyCreate(input: $input) {
-        id
-      }
-    }`,
-    { input: partyInput }
-  );
+  try {
+    const result = await createFulfillmentCenter(input);
 
-  if (partyResult.errors?.length || !partyResult.data?.partyCreate?.id) {
-    const errorMessage = partyResult.errors?.[0]?.message || "Failed to create party";
-    return NextResponse.json({ error: errorMessage }, { status: 500 });
-  }
+    if (result.errors?.length) {
+      const errorMessage = result.errors[0]?.message || "Failed to create fulfillment center";
+      return NextResponse.json({ error: errorMessage }, { status: 500 });
+    }
 
-  const partyId = partyResult.data.partyCreate.id;
-
-  // Step 2: Link the party to a fulfillment center via updateFulfillmentCenter
-  const fulfillmentResult = await zonosGraphQL<{ updateFulfillmentCenter: { id: string } }>(
-    `mutation UpdateFulfillmentCenter($input: UpdateFulfillmentCenterInput!) {
-      updateFulfillmentCenter(input: $input) {
-        id
-      }
-    }`,
-    { input: { party: partyId } }
-  );
-
-  if (fulfillmentResult.errors?.length) {
-    // If updateFulfillmentCenter fails, still return the party ID as partial success
+    const data = result.data;
     return NextResponse.json(
       {
-        partyId,
-        warning: "Party created but fulfillment center link may require manual setup",
-        fulfillmentError: fulfillmentResult.errors[0]?.message,
+        success: true,
+        partyId: data?.partyCreate?.id,
+        fulfillmentCenterId: data?.fulfillmentCenterCreate?.id,
       },
-      { status: 207 }
+      { status: 201 }
     );
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "An unexpected error occurred";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
-
-  return NextResponse.json(
-    {
-      success: true,
-      partyId,
-      fulfillmentCenterId: fulfillmentResult.data?.updateFulfillmentCenter?.id,
-    },
-    { status: 201 }
-  );
 }
