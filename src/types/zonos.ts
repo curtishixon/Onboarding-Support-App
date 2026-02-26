@@ -47,6 +47,7 @@ export type WebhookEvent =
 export interface PartyLocationInput {
   line1?: string;
   line2?: string;
+  line3?: string;
   locality?: string;
   administrativeArea?: string;
   administrativeAreaCode?: string;
@@ -149,6 +150,7 @@ export interface WebhookUpdateInput {
 export interface PartyLocation {
   line1: string | null;
   line2: string | null;
+  line3: string | null;
   locality: string | null;
   administrativeArea: string | null;
   administrativeAreaCode: string | null;
